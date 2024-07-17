@@ -2,6 +2,7 @@
 import Hero from "./Components/Hero";
 import Highlights from "./Components/Highlights";
 import Navbar from "./Components/Navbar";
+import Model from "./Components/Model"
 
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
       <Navbar />
       <Hero />
       <Highlights />
+      <Model />
     </main>
   );
 }
