@@ -45,41 +45,34 @@ const VideoCarousel = () => {
     })
   }, [isEnd, videoId])
 
-  const getAppropriateWidth = () => {
-    if (typeof window !== 'undefined') {
-      if (window.innerWidth < 760) return '10vw';
-      if (window.innerWidth < 1200) return '10vw';
-      return '4vw';
-    }
-    return '4vw';
-  }
+  
 
   useEffect(() => {
     let currentProgress = 0
     let span = videoSpanRef.current
-  
+
     if (span[videoId]) {
       let anim = gsap.to(span[videoId], {
         onUpdate: () => {
           const progress = Math.ceil(anim.progress() * 100)
           if(progress != currentProgress) {
             currentProgress = progress
-  
+
             gsap.to(videoDivRef.current[videoId], {
-              width: getAppropriateWidth()
+                width: window.innerWidth < 760 ? '10vw' : window.innerWidth < 1200 ? '10vw' : '4vw'
             })
             gsap.to(span[videoId], {
-              width: `${currentProgress}%`, backgroundColor: 'white'
+                width: `${currentProgress}%`, backgroundColor: 'white'
             })
           }
         },
         onComplete: () => {
           if(isPlaying) {
             gsap.to(videoDivRef.current[videoId], {
-              width: '12px'
+                width: '12px'
             })
             gsap.to(span[videoId], {
-              backgroundColor: '#afafaf'
+                backgroundColor: '#afafaf'
             })
           }
         }
